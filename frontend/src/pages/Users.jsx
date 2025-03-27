@@ -50,7 +50,7 @@ const Users = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 dark:text-white">
       <h1 className="text-2xl font-bold mb-6">Users Management</h1>
 
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
@@ -74,7 +74,7 @@ const Users = () => {
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white divide-y divide-gray-200 text-black">
             {users.map((user) => (
               <tr key={user._id}>
                 <td className="px-6 py-4 whitespace-nowrap">

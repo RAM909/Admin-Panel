@@ -50,7 +50,7 @@ const ProductList = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-6 dark:text-white">
         <h1 className="text-2xl font-bold">Products</h1>
         <Link
           to="/add-product"
@@ -67,7 +67,7 @@ const ProductList = () => {
           placeholder="Search products..."
           value={keyword}
           onChange={handleSearch}
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:text-white"
         />
       </div>
 
