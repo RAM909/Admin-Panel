@@ -22,7 +22,16 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: "*" }));
+app.use(
+  cors({
+    origin:
+      process.env.NODE_ENV === "production"
+        ? "https://voltvision-admin.netlify.app"
+        : "http://localhost:5173",
+    credentials: true,
+  })
+);
+
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
