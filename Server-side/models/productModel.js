@@ -22,12 +22,6 @@ const productSchema = new mongoose.Schema(
       type: [String],
       required: true,
     },
-    image2: {
-      type: String,
-    },
-    image3: {
-      type: String,
-    },
     stock: {
       type: Number,
       required: true,

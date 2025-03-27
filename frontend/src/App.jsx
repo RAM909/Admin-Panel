@@ -14,6 +14,7 @@ import Messages from "./pages/Messages";
 import Orders from "./pages/Orders";
 import CreateAdmin from "./pages/CreateAdmin";
 import ProtectedRoute from "./components/ProtectedRoute";
+import EditProduct from "./pages/EditProduct";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -63,6 +64,7 @@ function App() {
                   <Route path="/messages" element={<Messages />} />
                   <Route path="/orders" element={<Orders />} />
                   <Route path="/create-admin" element={<CreateAdmin />} />
+                  <Route path="/edit-product/:id" element={<EditProduct />} />
                 </Route>
               </Routes>
             </Router>
