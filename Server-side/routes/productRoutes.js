@@ -48,7 +48,11 @@ router
   .put(
     authenticateToken,
     admin,
-    upload.array("images", 3),
+    upload.fields([
+      { name: "image01", maxCount: 1 },
+      { name: "image02", maxCount: 1 },
+      { name: "image03", maxCount: 1 },
+    ]),
     handleUploadError,
     updateProduct
   )

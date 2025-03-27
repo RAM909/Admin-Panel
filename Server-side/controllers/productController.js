@@ -86,6 +86,15 @@ const createProduct = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
+  // const images = [];
+  // if (req.files) {
+  //   if (req.files.image01) {
+  //     images.push(req.files.image01[0].path);
+  //   }
+  //   if (req.files.image02) {
+  //     images.push(req.files.image02[0].path);
+  //   }
+  // }
 
   if (product) {
     product.name = req.body.name || product.name;
