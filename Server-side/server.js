@@ -26,7 +26,7 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "production"
-        ? "https://voltvision-admin.netlify.app"
+        ? "https://admin-panel-1-rele.onrender.com"
         : "http://localhost:5173",
     credentials: true,
   })

@@ -1,24 +1,25 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { 
-  UserCircleIcon, 
-  EnvelopeIcon, 
-  KeyIcon, 
-  EyeIcon, 
-  EyeSlashIcon, 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  UserCircleIcon,
+  EnvelopeIcon,
+  KeyIcon,
+  EyeIcon,
+  EyeSlashIcon,
   ShieldCheckIcon,
-  ArrowLeftIcon
-} from '@heroicons/react/24/outline';
-import toast from 'react-hot-toast';
+  ArrowLeftIcon,
+} from "@heroicons/react/24/outline";
+import toast from "react-hot-toast";
+import { creatadmin } from "../services/api";
 
 const CreateAdmin = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    role: 'Admin',
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    role: "admin",
   });
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -34,20 +35,25 @@ const CreateAdmin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (formData.password !== formData.confirmPassword) {
-      toast.error('Passwords do not match');
+      toast.error("Passwords do not match");
       return;
     }
 
     setLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      toast.success('Admin created successfully!');
-      navigate('/users');
+      const response = await creatadmin(formData);
+      console.log(response);
+      if (response.status === 201) {
+        toast.success("Admin created successfully!");
+        navigate("/users");
+      } else {
+        toast.error("Failed to create admin");
+      }
     } catch (error) {
-      toast.error('Failed to create admin');
+      toast.error("Failed to create admin");
     } finally {
       setLoading(false);
     }
@@ -215,7 +221,7 @@ const CreateAdmin = () => {
             <div className="flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-3 mt-8">
               <button
                 type="button"
-                onClick={() => navigate('/users')}
+                onClick={() => navigate("/users")}
                 className="px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"
               >
                 Cancel
@@ -231,7 +237,7 @@ const CreateAdmin = () => {
                     Creating...
                   </div>
                 ) : (
-                  'Create Admin'
+                  "Create Admin"
                 )}
               </button>
             </div>
@@ -242,4 +248,4 @@ const CreateAdmin = () => {
   );
 };
 
-export default CreateAdmin; 
+export default CreateAdmin;

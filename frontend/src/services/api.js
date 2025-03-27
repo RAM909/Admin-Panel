@@ -1,8 +1,8 @@
 import axios from "axios";
 
-// const API_URL = "http://localhost:5000/api";
+const API_URL = "http://localhost:5000/api";
 
-const API_URL = "https://admin-panel-5rac.onrender.com/api";
+// const API_URL = "https://admin-panel-5rac.onrender.com/api";
 
 // Create axios instance with default config
 const api = axios.create({
@@ -116,5 +116,7 @@ export const updateMessage = (id, messageData) =>
   api.put(`/messages/${id}`, messageData);
 export const deleteMessage = (id) => api.delete(`/messages/${id}`);
 export const getUnreadCount = () => api.get("/messages/unread/count");
+
+export const creatadmin = (adminData) => api.post("/users", adminData);
 
 export default api;
