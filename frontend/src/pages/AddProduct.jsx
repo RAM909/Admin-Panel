@@ -1,18 +1,20 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { createProduct } from "../services/api";
+import toast from "react-hot-toast";
 
 const AddProduct = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
-    price: '',
-    details: '',
-    dimensions: '',
-    category: '',
+    name: "",
+    price: "",
+    description: "",
+    dimensions: "",
+    category: "",
+    stock: "",
     image01: null,
     image02: null,
-    image03: null
+    image03: null,
   });
   const [loading, setLoading] = useState(false);
 
@@ -37,12 +39,12 @@ const AddProduct = () => {
     setLoading(true);
 
     try {
-      // TODO: Implement actual product creation logic
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      toast.success('Product added successfully!');
-      navigate('/products');
+      await createProduct(formData);
+      toast.success("Product added successfully!");
+      navigate("/products");
     } catch (error) {
-      toast.error('Failed to add product');
+      console.log(error);
+      toast.error("Failed to add product");
     } finally {
       setLoading(false);
     }
@@ -92,13 +94,13 @@ const AddProduct = () => {
             {/* Details */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Details (required)
+                Description (required)
               </label>
               <textarea
-                name="details"
+                name="description"
                 required
-                placeholder="Enter product details"
-                value={formData.details}
+                placeholder="Enter product description"
+                value={formData.description}
                 onChange={handleChange}
                 rows={4}
                 className="w-full px-4 py-2 rounded-md border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -133,11 +135,27 @@ const AddProduct = () => {
                 className="w-full px-4 py-2 rounded-md border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               >
                 <option value="">Select a category</option>
-                <option value="electronics">Electronics</option>
-                <option value="clothing">Clothing</option>
-                <option value="furniture">Furniture</option>
-                <option value="books">Books</option>
+                <option value="solarpanel">Solar Panel</option>
+                <option value="household">Household</option>
+                <option value="switchgear">Switchgear</option>
+                <option value="handtools">Hand Tools</option>
               </select>
+            </div>
+
+            {/* Stock */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Stock (required)
+              </label>
+              <input
+                type="number"
+                name="stock"
+                required
+                placeholder="Enter product stock"
+                className="w-full px-4 py-2 rounded-md border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                value={formData.stock}
+                onChange={handleChange}
+              />
             </div>
 
             {/* Image Uploads */}
@@ -149,7 +167,7 @@ const AddProduct = () => {
                 type="file"
                 name="image01"
                 accept="image/*"
-                onChange={(e) => handleImageChange(e, 'image01')}
+                onChange={(e) => handleImageChange(e, "image01")}
                 className="w-full px-4 py-2 rounded-md border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white
                 file:mr-4 file:py-2 file:px-4
                 file:rounded-md file:border-0
@@ -170,7 +188,7 @@ const AddProduct = () => {
                   type="file"
                   name="image02"
                   accept="image/*"
-                  onChange={(e) => handleImageChange(e, 'image02')}
+                  onChange={(e) => handleImageChange(e, "image02")}
                   className="w-full px-4 py-2 rounded-md border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white
                   file:mr-4 file:py-2 file:px-4
                   file:rounded-md file:border-0
@@ -187,7 +205,7 @@ const AddProduct = () => {
                   type="file"
                   name="image03"
                   accept="image/*"
-                  onChange={(e) => handleImageChange(e, 'image03')}
+                  onChange={(e) => handleImageChange(e, "image03")}
                   className="w-full px-4 py-2 rounded-md border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white
                   file:mr-4 file:py-2 file:px-4
                   file:rounded-md file:border-0
@@ -206,7 +224,7 @@ const AddProduct = () => {
               disabled={loading}
               className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
             >
-              {loading ? 'Adding Product...' : 'Add Product'}
+              {loading ? "Adding Product..." : "Add Product"}
             </button>
           </div>
         </form>
@@ -215,4 +233,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct; 
+export default AddProduct;
